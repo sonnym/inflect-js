@@ -1,8 +1,3 @@
-var Inflect = function() {
-};
-
-module.exports = Inflect;
-
 // This is a list of nouns that use the same form for both singular and plural.  This list should remain entirely in lower case to correctly match Strings.
 var uncountable_words = [ 'equipment', 'information', 'rice', 'money', 'species', 'series', 'fish', 'sheep', 'moose', 'deer', 'news' ]
 
@@ -77,7 +72,7 @@ var uncountable_words = [ 'equipment', 'information', 'rice', 'money', 'species'
 /*
 This is a helper method that applies rules based replacement to a String
   Signature:
-    InflectionJS.apply_rules(str, rules, skip, override) == String
+    module.exportsionJS.apply_rules(str, rules, skip, override) == String
   Arguments:
     str - String - String to modify and return based on the passed rules
     rules - Array: [RegExp, String] - Regexp to match paired with String to use for replacement
@@ -86,7 +81,7 @@ This is a helper method that applies rules based replacement to a String
   Returns:
     String - passed String modified by passed rules
   Examples:
-    InflectionJS.apply_rules("cows", InflectionJs.singular_rules) === 'cow'
+    module.exportsionJS.apply_rules("cows", InflectionJs.singular_rules) === 'cow'
 */
 function apply_rules(str, rules, skip, override) {
   if (override) {
@@ -105,15 +100,15 @@ function apply_rules(str, rules, skip, override) {
   return str;
 }
 
-Inflect.prototype.pluralize = function(string, plural) {
-  return InflectionJS.apply_rules(string, this._plural_rules, this._uncountable_words, plural);
+module.exports.pluralize = function(string, plural) {
+  return apply_rules(string, plural_rules, uncountable_words, plural);
 };
 
-Inflect.prototype.singularize = function(string, singular) {
-  return InflectionJS.apply_rules(string, this._singular_rules, this._uncountable_words, singular);
+module.exports.singularize = function(string, singular) {
+  return apply_rules(string, singular_rules, uncountable_words, singular);
 };
 
-String.prototype.camelize = function(string, lowFirstLetter) {
+module.exports.camelize = function(string, lowFirstLetter) {
   var str = string.toLowerCase();
   var str_path = str.split('/');
 
@@ -131,40 +126,40 @@ String.prototype.camelize = function(string, lowFirstLetter) {
   return str;
 };
 
-Inflect.prototype.underscore = function(str) {
+module.exports.underscore = function(str) {
   var str_path = str.split('::');
   for (var i = 0; i < str_path.length; i++) {
-    str_path[i] = str_path[i].replace(InflectionJS.uppercase, '_$1');
-    str_path[i] = str_path[i].replace(InflectionJS.underbar_prefix, '');
+    str_path[i] = str_path[i].replace(module.exportsionJS.uppercase, '_$1');
+    str_path[i] = str_path[i].replace(module.exportsionJS.underbar_prefix, '');
   }
   str = str_path.join('/').toLowerCase();
   return str;
 };
 
-Inflect.prototype.humanize = function(string, lowFirstLetter) {
+module.exports.humanize = function(string, lowFirstLetter) {
   var str = string.toLowerCase();
-  str = str.replace(InflectionJS.id_suffix, '');
-  str = str.replace(InflectionJS.underbar, ' ');
+  str = str.replace(module.exportsionJS.id_suffix, '');
+  str = str.replace(module.exportsionJS.underbar, ' ');
   if (!lowFirstLetter) {
     str = str.capitalize();
   }
   return str;
 };
 
-Inflect.prototype.capitalize = function(string) {
+module.exports.capitalize = function(string) {
   var str = string.toLowerCase();
   str = str.substring(0, 1).toUpperCase() + str.substring(1);
   return str;
 };
 
-Inflect.prototype.dasherize = function(str) {
-  str = str.replace(InflectionJS.space_or_underbar, '-');
+module.exports.dasherize = function(str) {
+  str = str.replace(module.exportsionJS.space_or_underbar, '-');
   return str;
 };
 
-Inflect.prototype.titleize = function(string) {
+module.exports.titleize = function(string) {
   var str = string.toLowerCase();
-  str = str.replace(InflectionJS.underbar, ' ');
+  str = str.replace(module.exportsionJS.underbar, ' ');
   var str_arr = str.split(' ');
   for (var x = 0; x < str_arr.length; x++) {
     var d = str_arr[x].split('-');
@@ -180,28 +175,26 @@ Inflect.prototype.titleize = function(string) {
   return str;
 };
 
-Inflect.demodulize = function(str) {
+module.exports.demodulize = function(str) {
   var str_arr = str.split('::');
   str = str_arr[str_arr.length - 1];
   return str;
 };
 
-Inflect.tableize = function(str) {
-  str = str.underscore().pluralize();
-  return str;
+module.exports.tableize = function(str) {
+  return this.pluralize(this.underscore(str));
 };
 
-Inflect.prototype.classify = function(str) {
-  str = str.camelize().singularize();
-  return str;
+module.exports.classify = function(str) {
+  return this.singularize(this.camelize(str));
 };
 
-Inflect.prototype.foreign_key = function(str, dropIdUbar) {
+module.exports.foreign_key = function(str, dropIdUbar) {
   str = str.demodulize().underscore() + ((dropIdUbar) ? ('') : ('_')) + 'id';
   return str;
 };
 
-Inflect.prototype.ordinalize = function(str) {
+module.exports.ordinalize = function(str) {
   var str_arr = str.split(' ');
   for (var x = 0; x < str_arr.length; x++) {
     var i = parseInt(str_arr[x]);
