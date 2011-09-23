@@ -122,7 +122,7 @@ module.exports.camelize = function(string, lowFirstLetter) {
 
     str_path[i] = str_arr.join('');
   }
-  str = str_path.join('::');
+  str = str_path.join('');
   return str;
 };
 
