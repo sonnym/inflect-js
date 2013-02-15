@@ -72,7 +72,7 @@ var uncountable_words = [ 'equipment', 'information', 'rice', 'money', 'species'
 /*
 This is a helper method that applies rules based replacement to a String
   Signature:
-    module.exportsionJS.apply_rules(str, rules, skip, override) == String
+    apply_rules(str, rules, skip, override) == String
   Arguments:
     str - String - String to modify and return based on the passed rules
     rules - Array: [RegExp, String] - Regexp to match paired with String to use for replacement
@@ -81,7 +81,7 @@ This is a helper method that applies rules based replacement to a String
   Returns:
     String - passed String modified by passed rules
   Examples:
-    module.exportsionJS.apply_rules("cows", InflectionJs.singular_rules) === 'cow'
+    apply_rules("cows", InflectionJs.singular_rules) === 'cow'
 */
 function apply_rules(str, rules, skip, override) {
   if (override) {
@@ -129,8 +129,8 @@ module.exports.camelize = function(string, lowFirstLetter) {
 module.exports.underscore = function(str) {
   var str_path = str.split('::');
   for (var i = 0; i < str_path.length; i++) {
-    str_path[i] = str_path[i].replace(module.exportsionJS.uppercase, '_$1');
-    str_path[i] = str_path[i].replace(module.exportsionJS.underbar_prefix, '');
+    str_path[i] = str_path[i].replace(uppercase, '_$1');
+    str_path[i] = str_path[i].replace(underbar_prefix, '');
   }
   str = str_path.join('/').toLowerCase();
   return str;
@@ -138,10 +138,10 @@ module.exports.underscore = function(str) {
 
 module.exports.humanize = function(string, lowFirstLetter) {
   var str = string.toLowerCase();
-  str = str.replace(module.exportsionJS.id_suffix, '');
-  str = str.replace(module.exportsionJS.underbar, ' ');
+  str = str.replace(id_suffix, '');
+  str = str.replace(underbar, ' ');
   if (!lowFirstLetter) {
-    str = str.capitalize();
+    str = this.capitalize(str);
   }
   return str;
 };
@@ -153,19 +153,19 @@ module.exports.capitalize = function(string) {
 };
 
 module.exports.dasherize = function(str) {
-  str = str.replace(module.exportsionJS.space_or_underbar, '-');
+  str = str.replace(space_or_underbar, '-');
   return str;
 };
 
 module.exports.titleize = function(string) {
   var str = string.toLowerCase();
-  str = str.replace(module.exportsionJS.underbar, ' ');
+  str = str.replace(underbar, ' ');
   var str_arr = str.split(' ');
   for (var x = 0; x < str_arr.length; x++) {
     var d = str_arr[x].split('-');
     for (var i = 0; i < d.length; i++) {
-      if (this._non_titlecased_words.indexOf(d[i].toLowerCase()) < 0) {
-        d[i] = d[i].capitalize();
+      if (non_titlecased_words.indexOf(d[i].toLowerCase()) < 0) {
+        d[i] = this.capitalize(d[i]);
       }
     }
     str_arr[x] = d.join('-');
@@ -190,7 +190,7 @@ module.exports.classify = function(str) {
 };
 
 module.exports.foreign_key = function(str, dropIdUbar) {
-  str = str.demodulize().underscore() + ((dropIdUbar) ? ('') : ('_')) + 'id';
+  str = this.underscore(this.demodulize(str)) + ((dropIdUbar) ? ('') : ('_')) + 'id';
   return str;
 };
 
