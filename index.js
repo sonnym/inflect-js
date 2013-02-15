@@ -198,7 +198,7 @@ module.exports.ordinalize = function(str) {
   var str_arr = str.split(' ');
   for (var x = 0; x < str_arr.length; x++) {
     var i = parseInt(str_arr[x]);
-    if (i === NaN) {
+    if (i !== NaN) {
       var ltd = str_arr[x].substring(str_arr[x].length - 2);
       var ld = str_arr[x].substring(str_arr[x].length - 1);
       var suf = "th";
