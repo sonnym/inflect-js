@@ -10,5 +10,9 @@
   , "url": "https://github.com/sonnym/inflect-js.git"
   }
 
+, "devDependencies": {
+    "nodeunit": "~0.7"
+  }
+
 , "engines": { "node": ">=0.4" }
 }
