@@ -1,5 +1,7 @@
 ## Inflect-JS
 
+[![Build Status](https://travis-ci.org/sonnym/inflect-js.png?branch=master)](https://travis-ci.org/sonnym/inflect-js)
+
 A clone of Ryan Schuft's [inflection-js](https://code.google.com/p/inflection-js/),
 rewritten to take string arguments rather than monkey patching the core String class.
 
