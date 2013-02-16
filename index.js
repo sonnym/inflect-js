@@ -101,7 +101,7 @@ function apply_rules(str, rules, skip, override) {
 }
 
 module.exports.pluralize = function(string, plural) {
-  return apply_rules(string, plural_rules, uncountable_words, plural);
+  return apply_rules(string, plural_rules, uncountable_words);
 };
 
 module.exports.singularize = function(string, singular) {

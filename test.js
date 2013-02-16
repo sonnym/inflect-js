@@ -1,7 +1,6 @@
 var Inflect = require("./index.js");
 
 exports.test_pluralize_function = function(test) {
-  test.equal("cow", Inflect.pluralize("cow", 1));
   test.equal("cows", Inflect.pluralize("cow", 0));
   test.equal("cows", Inflect.pluralize("cow", 2));
   test.done();
