@@ -13,7 +13,7 @@ exports.test_singularize_function = function(test) {
 
 exports.test_camelize_function = function(test) {
   test.equal("FooBarBaz", Inflect.camelize("foo_bar_baz"));
-  test.equal("fooBarBaz", Inflect.camelize("foo_bar_baz"), true);
+  test.equal("fooBarBaz", Inflect.camelize("foo_bar_baz", true));
   test.done();
 }
 
