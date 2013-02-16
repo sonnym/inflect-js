@@ -1,5 +1,5 @@
 { "name": "inflect-js"
-, "version": "0.0.1"
+, "version": "1.0.0"
 , "author": "Sonny Michaud <michaud.sonny@gmail.com> (https://github.com/sonnym)"
 , "description": "An inflection helper based on Ryan Schuft's inflection-js"
 
