@@ -23,8 +23,8 @@ exports.test_underscore_function = function(test) {
 }
 
 exports.test_humanize_function = function(test) {
-  test.equal("Foo Bar", Inflect.humanize("foo_bar"));
-  test.equal("foo Bar", Inflect.humanize("foo_bar"), true);
+  test.equal("Foo bar", Inflect.humanize("foo_bar"));
+  test.equal("foo bar", Inflect.humanize("foo_bar", true));
   test.done();
 }
 
